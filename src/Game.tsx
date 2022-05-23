@@ -55,7 +55,7 @@ const Game = () => {
   );
 
   const { id } = useParams();
-  const url = `ws://localhost:5000/lobby/${id}/`;
+  const url = `ws://mind.essung.dev/api/lobby/${id}/`;
 
   React.useEffect(() => {
     if (id) {
