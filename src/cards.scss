@@ -1,3 +1,10 @@
+#main-div {
+    display: grid;
+    grid-template-areas: "top" "bottom";
+    grid-template-rows: 1fr 1fr;
+    flex: 1;
+}
+
 .card {
     position: relative;
     background-color: #16181D;
@@ -14,9 +21,15 @@
     display: flex;
     flex-direction: row-reverse;
     justify-content: center;
+    align-items: end;
     overflow-x: scroll;
+    overflow-y: hidden;
+    grid-area: bottom;
 
-    padding: 10rem;
+    .card {
+        margin-bottom: 5rem;
+    }
+
 
     .card:not(:last-child) {
         margin-left: -2rem;
@@ -36,12 +49,15 @@
     flex-direction: row-reverse;    
     justify-content: center;
     overflow-x: scroll;
+    overflow-y: hidden;
+    grid-area: top;
 
     .card:not(:last-child) {
         margin-left: -9.5rem;
     }
     .card {
     box-shadow: -1rem 1rem 1rem #0004;
+    margin-top: 5rem;
     }
 }                           
 
@@ -55,7 +71,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    overflow: hidden;
+    overflow-y: hidden;
 
     h1 {
         animation: newRound 2s ease-in-out forwards;

@@ -65,15 +65,15 @@ const Cards = (props: { sendCard: (card: number) => void }) => {
       {newRound ? (
         <RoundThing />
       ) : (
-        <>
+        <div id="main-div">
           <div id="dealt-cards">
             <DealtCards />
           </div>
-          <span id="spacer" />
+          <span id="spacer"/>
           <div id="your-cards">
             <YourCards />
           </div>
-        </>
+        </div>
       )}
     </>
   );
