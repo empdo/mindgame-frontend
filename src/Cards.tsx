@@ -19,9 +19,9 @@ const Cards = (props: { sendCard: (card: number) => void }) => {
   const DealtCards = () => {
     return (
       <>
-        {gameData.dealtCards.map((card) => {
+        {gameData.dealtCards.map((card, index) => {
           return (
-            <div className="card">
+            <div className="card" key={index}>
               <h2>{card}</h2>
             </div>
           );
@@ -37,25 +37,24 @@ const Cards = (props: { sendCard: (card: number) => void }) => {
     React.useEffect(() => {
       window.setTimeout(() => {
         if (cardsContainerRef.current) {
-          console.log("asd");
           cardsContainerRef.current.scrollTo({
             left: -cardsContainerRef.current.scrollWidth,
           });
         }
       }, 0);
-    }, [cardsContainerRef]);
+    }, []);
 
     const style = {
-      marginLeft: hasScrolled
+      marginLeft: !hasScrolled
         ? "-2rem"
-        : -window.innerWidth / gameData.yourCards.length + "px",
+        : (-window.innerWidth * 1.2) / gameData.yourCards.length + "px",
     };
 
     return (
       <div
         id="your-cards"
         onScroll={(e) => {
-          setHasScrolled(!e.currentTarget.scrollLeft ? false : true);
+          setHasScrolled(e.currentTarget.scrollLeft === 0 ? false : true);
         }}
         ref={cardsContainerRef}
       >
@@ -69,13 +68,11 @@ const Cards = (props: { sendCard: (card: number) => void }) => {
                 : {};
           }
 
-          console.log(index, gameData.yourCards.length);
           return (
             <div
               key={index}
               className="card"
               style={_style}
-              //              style={style}
               onClick={() => {
                 props.sendCard(card);
                 gameData.yourCards = gameData.yourCards.filter(
