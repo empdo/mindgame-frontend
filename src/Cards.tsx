@@ -31,12 +31,51 @@ const Cards = (props: { sendCard: (card: number) => void }) => {
   };
 
   const YourCards = () => {
+    const [hasScrolled, setHasScrolled] = React.useState(false);
+    const cardsContainerRef = React.useRef<HTMLDivElement>(null);
+
+    React.useEffect(() => {
+      window.setTimeout(() => {
+        if (cardsContainerRef.current) {
+          console.log("asd");
+          cardsContainerRef.current.scrollTo({
+            left: -cardsContainerRef.current.scrollWidth,
+          });
+        }
+      }, 0);
+    }, [cardsContainerRef]);
+
+    const style = {
+      marginLeft: hasScrolled
+        ? "-2rem"
+        : -window.innerWidth / gameData.yourCards.length + "px",
+    };
+
     return (
-      <>
-        {gameData.yourCards.map((card) => {
+      <div
+        id="your-cards"
+        onScroll={(e) => {
+          setHasScrolled(!e.currentTarget.scrollLeft ? false : true);
+        }}
+        ref={cardsContainerRef}
+      >
+        {gameData.yourCards.map((card, index) => {
+          let _style = {};
+
+          if (cardsContainerRef.current) {
+            _style =
+              cardsContainerRef.current.scrollWidth >= window.innerWidth
+                ? style
+                : {};
+          }
+
+          console.log(index, gameData.yourCards.length);
           return (
             <div
+              key={index}
               className="card"
+              style={_style}
+              //              style={style}
               onClick={() => {
                 props.sendCard(card);
                 gameData.yourCards = gameData.yourCards.filter(
@@ -48,7 +87,7 @@ const Cards = (props: { sendCard: (card: number) => void }) => {
             </div>
           );
         })}
-      </>
+      </div>
     );
   };
 
@@ -69,10 +108,8 @@ const Cards = (props: { sendCard: (card: number) => void }) => {
           <div id="dealt-cards">
             <DealtCards />
           </div>
-          <span id="spacer"/>
-          <div id="your-cards">
-            <YourCards />
-          </div>
+          <span id="spacer" />
+          <YourCards />
         </div>
       )}
     </>
