@@ -44,35 +44,29 @@ const Cards = (props: { sendCard: (card: number) => void }) => {
       }, 0);
     }, []);
 
-    const style = {
-      marginLeft: !hasScrolled
-        ? "-2rem"
-        : (-window.innerWidth * 1.2) / gameData.yourCards.length + "px",
-    };
-
     return (
       <div
         id="your-cards"
         onScroll={(e) => {
-          setHasScrolled(e.currentTarget.scrollLeft === 0 ? false : true);
+          setHasScrolled(e.currentTarget.scrollLeft === 0 ? true : false);
+          console.log(hasScrolled, e.currentTarget.scrollLeft);
         }}
         ref={cardsContainerRef}
       >
         {gameData.yourCards.map((card, index) => {
-          let _style = {};
-
-          if (cardsContainerRef.current) {
-            _style =
-              cardsContainerRef.current.scrollWidth >= window.innerWidth
-                ? style
-                : {};
-          }
-
           return (
             <div
               key={index}
               className="card"
-              style={_style}
+              style={
+                !hasScrolled
+                  ? {
+                      marginLeft: "-5rem",
+                    }
+                  : {
+                      marginLeft: "-2rem",
+                    }
+              }
               onClick={() => {
                 props.sendCard(card);
                 gameData.yourCards = gameData.yourCards.filter(
