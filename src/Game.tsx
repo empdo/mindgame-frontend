@@ -23,22 +23,35 @@ export const GameContext = React.createContext<LobbyState>(defaultLobbyState);
 const gameStateReducer = <T extends GameEvent>(
   state: LobbyState,
   action: T
-) => {
+): LobbyState => {
   switch (action.type) {
     case ActionType.PlayerJoin:
-      return { ...state, players: action.data };
+      return {
+        ...state,
+        players: action.data,
+        localPlayer: action.data.find((player) => player.local),
+      };
     case ActionType.Started:
       return { ...state, started: action.data };
     case ActionType.DealtCards:
       return { ...state, dealtCards: action.data };
-    case ActionType.YourCards:
+    case ActionType.Cards:
+      if (!state.localPlayer) {
+        return state;
+      }
+
       return {
         ...state,
-        round: action.data.length,
-        yourCards: action.data.sort(function (a, b) {
+        round: action.data[state.localPlayer.id].length,
+        yourCards: action.data[state.localPlayer.id].sort(function (a, b) {
           return a > b ? -1 : 1;
         }),
+        players: state.players.map((player) => {
+          player.cards = action.data[player.id] || [];
+          return player;
+        }),
       };
+
     case ActionType.Lives:
       return { ...state, lives: action.data };
     case ActionType.Lost:

@@ -1,7 +1,9 @@
 export interface User {
   name: string;
+  id: number;
   readyState: boolean;
   local: boolean;
+  cards: number[];
 }
 
 export interface BaseEvent {
@@ -17,9 +19,9 @@ export interface StartedEvent extends BaseEvent {
   type: ActionType.Started;
   data: boolean;
 }
-export interface YourCardsEvent extends BaseEvent {
-  type: ActionType.YourCards;
-  data: number[];
+export interface CardsEvent extends BaseEvent {
+  type: ActionType.Cards;
+  data: { [id: string]: number[] };
 }
 export interface DealtCardsEvent extends BaseEvent {
   type: ActionType.DealtCards;
@@ -38,7 +40,7 @@ export interface LostEvent extends BaseEvent {
 export type GameEvent =
   | PlayerJoinEvent
   | StartedEvent
-  | YourCardsEvent
+  | CardsEvent
   | DealtCardsEvent
   | LivesEvent
   | LostEvent;
@@ -46,7 +48,7 @@ export type GameEvent =
 export enum ActionType {
   PlayerJoin = 1,
   Started = 2,
-  YourCards = 3,
+  Cards = 3,
   DealtCards = 4,
   Lives = 5,
   Lost = 6,
@@ -61,4 +63,5 @@ export interface LobbyState {
   lives: number;
   lost: boolean;
   round: number;
+  localPlayer?: User;
 }
