@@ -25,10 +25,9 @@
     justify-content: center;
     align-items: flex-end;
     overflow-x: scroll;
-    overflow-y: hidden;
     grid-area: bottom;
 
-    min-width: 101vw;
+    margin-left: 1rem;
 
 
     .card {

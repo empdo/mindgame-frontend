@@ -31,42 +31,25 @@ const Cards = (props: { sendCard: (card: number) => void }) => {
   };
 
   const YourCards = () => {
-    const [hasScrolled, setHasScrolled] = React.useState(false);
     const cardsContainerRef = React.useRef<HTMLDivElement>(null);
 
     React.useEffect(() => {
       window.setTimeout(() => {
         if (cardsContainerRef.current) {
           cardsContainerRef.current.scrollTo({
-            left: -cardsContainerRef.current.scrollWidth,
+            //            left: -window.innerWidth / 2,
           });
         }
       }, 0);
     }, []);
 
     return (
-      <div
-        id="your-cards"
-        onScroll={(e) => {
-          setHasScrolled(e.currentTarget.scrollLeft === 0 ? true : false);
-          console.log(hasScrolled, e.currentTarget.scrollLeft);
-        }}
-        ref={cardsContainerRef}
-      >
+      <div id="your-cards" onScroll={(e) => {}} ref={cardsContainerRef}>
         {gameData.yourCards.map((card, index) => {
           return (
             <div
               key={index}
               className="card"
-              style={
-                !hasScrolled
-                  ? {
-                      marginLeft: "-5rem",
-                    }
-                  : {
-                      marginLeft: "-2rem",
-                    }
-              }
               onClick={() => {
                 props.sendCard(card);
                 gameData.yourCards = gameData.yourCards.filter(
