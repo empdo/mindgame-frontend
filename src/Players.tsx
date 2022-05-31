@@ -14,7 +14,7 @@ const Players = () => {
             <div key={player.name}>
               <h3>
                 {player.name} {player.local && "(you)"}
-                {gamedata.started && (
+                {gamedata.started && !player.local && (
                   <div id="player-card-holder">
                     <>
                       {player.cards.map((card) => {
