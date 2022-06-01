@@ -5,6 +5,9 @@ import Players from "../players/Players";
 import Lobby from "../lobby/Lobby";
 import "./game.scss";
 import Cards from "./../cards/Cards";
+import { getToken } from "../../api";
+import { useNavigate } from "react-router-dom";
+
 //import AnimationEnd from "./AnimationEnd";
 
 const defaultLobbyState: LobbyState = {
@@ -61,6 +64,7 @@ const gameStateReducer = <T extends GameEvent>(
 
 const Game = () => {
   let [ws, setWs] = React.useState<WebSocket | undefined>();
+  const navigate = useNavigate();
 
   const [gameReducer, handleGameReducer] = React.useReducer(
     gameStateReducer,
@@ -72,34 +76,20 @@ const Game = () => {
   //const url = `ws://localhost:10406/api/lobby/${id}/`;
 
   React.useEffect(() => {
+    let token = window.localStorage.getItem("token");
+
+    if (!token) {
+      getToken(token || undefined);
+    }
+
     if (id && !ws) {
-      const ws = new WebSocket(url);
+      const ws = new WebSocket(url + "?token=" + token);
       ws.addEventListener("message", (e) => {
         const data = JSON.parse(e.data);
         handleGameReducer(data);
       });
-      ws.onopen = () => {
-        ws.send(
-          JSON.stringify({
-            type: 3,
-            data: window.localStorage.getItem("name") || "",
-          })
-        );
-      };
 
       setWs(ws);
-
-      window.addEventListener("storage", (e) => {
-        e.preventDefault();
-        if (e.key === "name") {
-          ws.send(
-            JSON.stringify({
-              type: 3,
-              data: window.localStorage.getItem("name") || "",
-            })
-          );
-        }
-      });
     }
   }, [id, url, ws]);
   if (!id) return <>Id missing from params</>;
@@ -149,18 +139,18 @@ const Game = () => {
       <GameContext.Provider value={gameReducer}>
         <div id="top-bar">
           <Players />
-          {
-            gameReducer.started && <Lives />
-            //   ) : (
-            //     gameReducer.players.length > 0 && (
-            //       <img
-            //         src="/settings_FILL0_wght400_GRAD0_opsz48.svg"
-            //         className="settings-icon"
-            //         onClick={() => navigate("/settings")}
-            //       />
-            //     )
-            //   )
-          }
+          {gameReducer.started ? (
+            <Lives />
+          ) : (
+            gameReducer.players.length > 0 && (
+              <img
+                src="/settings_FILL0_wght400_GRAD0_opsz48.svg"
+                className="settings-icon"
+                onClick={() => navigate("/settings")}
+                alt="settings"
+              />
+            )
+          )}
         </div>
         {gameReducer.started ? (
           <Cards sendCard={sendCard} />

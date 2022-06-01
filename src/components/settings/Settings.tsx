@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { getToken } from "../../api";
 
 const Settings = () => {
   let [name, setName] = React.useState(
@@ -25,7 +26,10 @@ const Settings = () => {
       </div>
       <h2
         className="clickable underline"
-        onClick={() => window.localStorage.setItem("name", name)}
+        onClick={() => {
+          window.localStorage.setItem("name", name);
+          getToken(window.localStorage.getItem("token") || undefined);
+        }}
       >
         {name ? "Save name" : "Save name (empty)"}
       </h2>
