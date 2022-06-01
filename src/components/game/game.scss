@@ -95,3 +95,37 @@ button {
         height: 2.4rem;
     }
 }
+
+@keyframes shake {
+    0% {
+        transform: translateX(0.5rem);
+    }
+    50% {
+        transform: translateX(-0.5rem);
+    }
+    100%{
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+    
+}
+
+#message-thing {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+
+    h1 {
+        animation: shake 0.2s 2, fadeOut 0.2s 2.3s;
+    }
+}
