@@ -1,12 +1,14 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { getToken } from "../../api";
+import { PopupContext } from "../../App";
 
 const Settings = () => {
   let [name, setName] = React.useState(
     window.localStorage.getItem("name") || ""
   );
   const navigate = useNavigate();
+  const popupContext = React.useContext(PopupContext);
 
   return (
     <div>
@@ -20,8 +22,9 @@ const Settings = () => {
         <h2>Name:</h2>
         <input
           type="text"
-          value={name}
+          defaultValue={name}
           onChange={(e) => setName(e.target.value)}
+          placeholder={"Random name"}
         />
       </div>
       <h2
@@ -29,9 +32,10 @@ const Settings = () => {
         onClick={() => {
           window.localStorage.setItem("name", name);
           getToken(window.localStorage.getItem("token") || undefined);
+          popupContext("Settings saved");
         }}
       >
-        {name ? "Save name" : "Save name (empty)"}
+        Save name
       </h2>
     </div>
   );

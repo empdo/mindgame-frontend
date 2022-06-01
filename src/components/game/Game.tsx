@@ -35,7 +35,7 @@ const gameStateReducer = <T extends GameEvent>(
         localPlayer: action.data.find((player) => player.local),
       };
     case ActionType.Started:
-      return { ...state, started: action.data };
+      return { ...state, started: action.data, lost: false };
     case ActionType.DealtCards:
       return { ...state, dealtCards: action.data };
     case ActionType.Cards:
@@ -58,7 +58,7 @@ const gameStateReducer = <T extends GameEvent>(
     case ActionType.Lives:
       return { ...state, lives: action.data };
     case ActionType.Lost:
-      return { ...state, lost: action.data };
+      return { ...state, lost: action.data, started: false };
   }
 };
 
@@ -116,9 +116,8 @@ const Game = () => {
         />
       );
     }
-    const darkHearts = [];
     for (i = 0; i < gameReducer.players.length - gameReducer.lives; i++) {
-      darkHearts.push(
+      hearts.push(
         <img
           src="/favorite_FILL1_wght400_GRAD0_opsz48.svg"
           id="dark"
@@ -127,37 +126,45 @@ const Game = () => {
         />
       );
     }
+    return <>{hearts}</>;
+  };
+
+  const MessageThing = () => {
     return (
-      <>
-        {hearts} {darkHearts}
-      </>
+      <div id="message-thing">
+        <h1>You lost!</h1>
+      </div>
     );
   };
 
   return (
     <>
-      <GameContext.Provider value={gameReducer}>
-        <div id="top-bar">
-          <Players />
+      {gameReducer.lost && false ? (
+        <MessageThing />
+      ) : (
+        <GameContext.Provider value={gameReducer}>
+          <div id="top-bar">
+            <Players />
+            {gameReducer.started ? (
+              <Lives />
+            ) : (
+              gameReducer.players.length > 0 && (
+                <img
+                  src="/settings_FILL0_wght400_GRAD0_opsz48.svg"
+                  className="settings-icon clickable"
+                  onClick={() => navigate("/settings")}
+                  alt="settings"
+                />
+              )
+            )}
+          </div>
           {gameReducer.started ? (
-            <Lives />
+            <Cards sendCard={sendCard} />
           ) : (
-            gameReducer.players.length > 0 && (
-              <img
-                src="/settings_FILL0_wght400_GRAD0_opsz48.svg"
-                className="settings-icon"
-                onClick={() => navigate("/settings")}
-                alt="settings"
-              />
-            )
+            <Lobby toggle={toggleReady} />
           )}
-        </div>
-        {gameReducer.started ? (
-          <Cards sendCard={sendCard} />
-        ) : (
-          <Lobby toggle={toggleReady} />
-        )}
-      </GameContext.Provider>
+        </GameContext.Provider>
+      )}
     </>
   );
 };

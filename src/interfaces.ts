@@ -32,6 +32,7 @@ export interface LivesEvent extends BaseEvent {
   type: ActionType.Lives;
   data: number;
 }
+
 export interface LostEvent extends BaseEvent {
   type: ActionType.Lost;
   data: boolean;

@@ -64,8 +64,8 @@
         margin-left: -9.5rem;
     }
     .card {
-    box-shadow: -1rem 1rem 1rem #0004;
-    margin-top: 5rem;
+        box-shadow: -1rem 1rem 1rem #0004;
+        margin-top: 5rem;
     }
 }                           
 
@@ -80,7 +80,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    overflow-y: hidden;
+    overflow: hidden;
 
     h1 {
         animation: newRound 2s ease-in-out forwards;
