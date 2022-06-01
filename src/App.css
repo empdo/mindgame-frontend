@@ -2,6 +2,21 @@
   text-align: center;
 }
 
+a {
+  color: white;
+}
+
+.clickable {
+  cursor: pointer;
+}
+.underline {
+  text-decoration: underline;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

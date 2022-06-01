@@ -65,3 +65,8 @@ export interface LobbyState {
   round: number;
   localPlayer?: User;
 }
+
+export interface Lobby {
+  players: String[];
+  id: number;
+}
