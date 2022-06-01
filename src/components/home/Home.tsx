@@ -44,7 +44,7 @@ const Home = () => {
       <nav>
         <h2>Mind Game</h2>
         <span />
-        <a href="#">
+        <a href="#rules">
           <h3>Rules</h3>
         </a>
         <a href="#lobbies">
