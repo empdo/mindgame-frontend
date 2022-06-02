@@ -19,6 +19,7 @@ const defaultLobbyState: LobbyState = {
   lives: 0,
   lost: false,
   round: 0,
+  won: false,
 };
 
 export const GameContext = React.createContext<LobbyState>(defaultLobbyState);
@@ -59,6 +60,8 @@ const gameStateReducer = <T extends GameEvent>(
       return { ...state, lives: action.data };
     case ActionType.Lost:
       return { ...state, lost: action.data, started: false };
+    case ActionType.Won:
+      return { ...state, won: true, started: false };
   }
 };
 
@@ -71,16 +74,16 @@ const Game = () => {
     defaultLobbyState
   );
 
-  const [lost, setLost] = React.useState(false);
+  const [message, setMessage] = React.useState(false);
   React.useEffect(() => {
-    if (gameReducer.lost) {
+    if (gameReducer.lost || gameReducer.won) {
       window.setTimeout(() => {
-        setLost(false);
+        setMessage(false);
       }, 2500);
 
-      setLost(true);
+      setMessage(true);
     }
-  }, [gameReducer.lost]);
+  }, [gameReducer.won, gameReducer.lost]);
 
   const { id } = useParams();
   const url = `wss://mind.essung.dev/api/lobby/${id}/`;
@@ -143,14 +146,15 @@ const Game = () => {
   const MessageThing = () => {
     return (
       <div id="message-thing">
-        <h1>You lost!</h1>
+        {gameReducer.lost && <h1>You lost!</h1>}
+        {gameReducer.won && <h1>You won!</h1>}
       </div>
     );
   };
 
   return (
     <>
-      {lost ? (
+      {message ? (
         <MessageThing />
       ) : (
         <GameContext.Provider value={gameReducer}>

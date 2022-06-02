@@ -27,10 +27,18 @@ export const getWs = (
   token?: string
 ) => {
   const ws = new WebSocket(url + "?token=" + token);
+
   ws.addEventListener("message", (e) => {
     const data = JSON.parse(e.data);
     handleGameReducer(data);
   });
+
+  ws.onclose = () => {
+    console.log("closed");
+    setTimeout(() => {
+      getWs(url, handleGameReducer, token);
+    }, 1000);
+  };
 
   return ws;
 };

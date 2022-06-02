@@ -38,13 +38,18 @@ export interface LostEvent extends BaseEvent {
   data: boolean;
 }
 
+export interface WonEvent extends BaseEvent {
+  type: ActionType.Won;
+}
+
 export type GameEvent =
   | PlayerJoinEvent
   | StartedEvent
   | CardsEvent
   | DealtCardsEvent
   | LivesEvent
-  | LostEvent;
+  | LostEvent
+  | WonEvent;
 
 export enum ActionType {
   PlayerJoin = 1,
@@ -53,6 +58,7 @@ export enum ActionType {
   DealtCards = 4,
   Lives = 5,
   Lost = 6,
+  Won = 7,
 }
 
 export interface LobbyState {
@@ -65,6 +71,7 @@ export interface LobbyState {
   lost: boolean;
   round: number;
   localPlayer?: User;
+  won: boolean;
 }
 
 export interface Lobby {
