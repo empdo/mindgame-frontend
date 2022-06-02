@@ -5,7 +5,7 @@ import Players from "../players/Players";
 import Lobby from "../lobby/Lobby";
 import "./game.scss";
 import Cards from "./../cards/Cards";
-import { getToken } from "../../api";
+import { getToken, getWs } from "../../api";
 import { useNavigate } from "react-router-dom";
 
 //import AnimationEnd from "./AnimationEnd";
@@ -87,23 +87,23 @@ const Game = () => {
   //const url = `ws://localhost:10406/api/lobby/${id}/`;
 
   React.useEffect(() => {
-    let token = window.localStorage.getItem("token");
+    let token = localStorage.token;
+
+    window.addEventListener("storage", (e) => {
+      token = localStorage.token;
+      setWs(getWs(url, handleGameReducer, token));
+    });
 
     if (!token) {
       getToken(token || undefined);
     }
-
-    if (id && !ws) {
-      const ws = new WebSocket(url + "?token=" + token);
-      ws.addEventListener("message", (e) => {
-        const data = JSON.parse(e.data);
-        handleGameReducer(data);
-      });
-
-      setWs(ws);
+    if (id && !ws && token) {
+      setWs(getWs(url, handleGameReducer, token));
     }
   }, [id, url, ws]);
+
   if (!id) return <>Id missing from params</>;
+  if (!ws) return <>Loading...</>;
 
   const toggleReady = () => {
     if (ws) {
