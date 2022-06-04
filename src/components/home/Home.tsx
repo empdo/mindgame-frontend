@@ -52,15 +52,34 @@ const Home = () => {
             <div id="navbar-content" onClick={() => setIsPressed(false)}>
               <h2>Mind Game</h2>
               <span />
-              <a href="#rules">
-                <h3>Rules</h3>
-              </a>
-              <a href="#lobbies">
-                <h3>Lobbies</h3>
-              </a>
+              <h3
+                className="clickable underline"
+                onClick={() => {
+                  setIsPressed(false);
+                  window.setTimeout(() => {
+                    window.location.assign("/#rules");
+                  }, 250);
+                }}
+              >
+                Rules
+              </h3>
+              <h3
+                className="clickable underline"
+                onClick={() => {
+                  setIsPressed(false);
+                  window.setTimeout(() => {
+                    window.location.assign("/#lobbies");
+                  }, 250);
+                }}
+              >
+                Lobbies
+              </h3>
               <h3
                 className="clickable underline "
-                onClick={() => navigate("/settings")}
+                onClick={() => {
+                  setIsPressed(false);
+                  navigate("/settings");
+                }}
               >
                 Settings
               </h3>
