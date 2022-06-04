@@ -39,8 +39,51 @@ const Home = () => {
     );
   };
 
-  return (
-    <>
+  const Navbar = () => {
+    const [isPressed, setIsPressed] = React.useState(false);
+    React.useEffect(() => {
+      document.body.style.overflow = isPressed ? "hidden" : "scroll";
+    }, [isPressed]);
+
+    if (window.innerWidth < 960) {
+      return (
+        <>
+          {isPressed && (
+            <div id="navbar-content" onClick={() => setIsPressed(false)}>
+              <h2>Mind Game</h2>
+              <span />
+              <a href="#rules">
+                <h3>Rules</h3>
+              </a>
+              <a href="#lobbies">
+                <h3>Lobbies</h3>
+              </a>
+              <h3
+                className="clickable underline "
+                onClick={() => navigate("/settings")}
+              >
+                Settings
+              </h3>
+            </div>
+          )}
+
+          <nav>
+            <div
+              onClick={() => {
+                setIsPressed(true);
+              }}
+              id="hamburger"
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </nav>
+        </>
+      );
+    }
+
+    return (
       <nav>
         <h2>Mind Game</h2>
         <span />
@@ -54,6 +97,12 @@ const Home = () => {
           Settings
         </h3>
       </nav>
+    );
+  };
+
+  return (
+    <>
+      <Navbar />
       <div className="home">
         <section>
           <h1 id="rules">Welcome to Mind Game</h1>
