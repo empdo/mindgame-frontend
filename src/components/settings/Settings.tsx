@@ -22,7 +22,7 @@ const Settings = () => {
         <h2>Name:</h2>
         <input
           type="text"
-          maxLength={8}
+          maxLength={10}
           defaultValue={name}
           onChange={(e) => setName(e.target.value)}
           placeholder={"Random name"}
