@@ -21,6 +21,7 @@ a {
   border-radius: 10px;
   border: solid white 0.2rem;
   opacity: 0;
+  background-color: #16181d;
 }
 
 html {

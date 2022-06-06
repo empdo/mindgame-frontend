@@ -82,7 +82,6 @@ const Cards = (props: { sendCard: (card: number) => void }) => {
           <div id="dealt-cards">
             <DealtCards />
           </div>
-          <span id="spacer" />
           <YourCards />
         </div>
       )}
