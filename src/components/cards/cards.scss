@@ -6,6 +6,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+     
+    &>  *{
+        margin: 0 auto;
+    }
 }
 
 .card {
@@ -23,17 +27,12 @@
 #your-cards {
     display: flex;
     flex-direction: row-reverse;
-    justify-content: flex-start;
-    align-items: flex-end;
+    justify-content: flex-end;
     overflow-x: scroll;
-    grid-area: bottom;
-    padding-top: 5rem;
+    box-sizing: content-box;
 
-
-    .card {
-        margin-bottom: 5rem;
-    }
-
+    padding: 1rem;
+    padding-top: 2.5rem;
 
     .card:not(:last-child) {
         margin-left: -2rem;
@@ -47,9 +46,9 @@
         transform: translateY(-1.5rem);
     }
 
-    .card:hover~.card {
-        transform: translateX(-1.5rem);
-    }
+//    .card:hover~.card {
+//        transform: translateX(-1.5rem);
+//    }
 
 }
 #dealt-cards {
@@ -59,13 +58,14 @@
     overflow-x: scroll;
     overflow-y: hidden;
     grid-area: top;
+    min-height: 10rem;
+    margin-top: 2.5rem;
 
     .card:not(:last-child) {
         margin-left: -9.5rem;
     }
     .card {
         box-shadow: -1rem 1rem 1rem #0004;
-        margin-top: 5rem;
     }
 }                           
 

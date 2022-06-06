@@ -23,6 +23,10 @@ a {
   opacity: 0;
 }
 
+html {
+  background-color: #16181d;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
