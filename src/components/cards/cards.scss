@@ -6,8 +6,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 1rem;
      
-    &>  *{
+    & > *{
         margin: 0 auto;
     }
 }
@@ -24,6 +25,18 @@
 
     transition: 0.2s;
 }
+
+@media screen and (min-width: 960px) {
+    .card:hover {
+        transform: translateY(-1.5rem);
+    }
+
+        .card:hover~.card {
+            transform: translateX(-1.5rem);
+        }
+
+}
+
 #your-cards {
     display: flex;
     flex-direction: row-reverse;
@@ -31,8 +44,7 @@
     overflow-x: scroll;
     box-sizing: content-box;
 
-    padding: 1rem;
-    padding-top: 2.5rem;
+    padding-bottom: 1rem;
 
     .card:not(:last-child) {
         margin-left: -2rem;
@@ -41,16 +53,6 @@
 
 }
 
-@media screen and (min-width: 960px) {
-    .card:hover {
-        transform: translateY(-1.5rem);
-    }
-
-//    .card:hover~.card {
-//        transform: translateX(-1.5rem);
-//    }
-
-}
 #dealt-cards {
     display: flex;
     flex-direction: row-reverse;    
@@ -59,13 +61,24 @@
     overflow-y: hidden;
     grid-area: top;
     min-height: 10rem;
-    margin-top: 2.5rem;
+    padding-top: 1rem;
 
     .card:not(:last-child) {
         margin-left: -9.5rem;
     }
     .card {
         box-shadow: -1rem 1rem 1rem #0004;
+    }
+
+    @media screen and (min-width: 960px) {
+        .card:hover {
+            transform: translateY(-1.5rem);
+        }
+
+        .card:hover~.card {
+            transform: translateX(-9rem);
+        }
+
     }
 }                           
 
