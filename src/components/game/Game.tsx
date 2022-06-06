@@ -103,6 +103,14 @@ const Game = () => {
     if (id && !ws && token) {
       setWs(getWs(url, handleGameReducer, token));
     }
+    if (ws) {
+      ws.onclose = () => {
+        console.log("closed");
+        setTimeout(() => {
+          setWs(getWs(url, handleGameReducer, token));
+        }, 1000);
+      };
+    }
   }, [id, url, ws]);
 
   if (!id) return <>Id missing from params</>;
