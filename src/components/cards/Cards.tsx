@@ -44,7 +44,14 @@ const Cards = (props: { sendCard: (card: number) => void }) => {
     }, []);
 
     return (
-      <div id="your-cards" onScroll={(e) => {}} ref={cardsContainerRef}>
+      <div
+        id="your-cards"
+        style={{
+          width: `calc((134px * ${gameData.yourCards.length} + 32px)) `,
+        }}
+        onScroll={(e) => {}}
+        ref={cardsContainerRef}
+      >
         {gameData.yourCards.map((card, index) => {
           return (
             <div

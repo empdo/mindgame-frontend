@@ -30,6 +30,7 @@ export const getWs = (
 
   ws.addEventListener("message", (e) => {
     const data = JSON.parse(e.data);
+    console.log(data);
     handleGameReducer(data);
   });
 

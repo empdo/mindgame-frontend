@@ -23,10 +23,12 @@
 #your-cards {
     display: flex;
     flex-direction: row-reverse;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-end;
     overflow-x: scroll;
     grid-area: bottom;
+    padding-top: 5rem;
+
 
     .card {
         margin-bottom: 5rem;
