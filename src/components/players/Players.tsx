@@ -16,18 +16,8 @@ const Players = () => {
                 {player.name} {player.local && "(you)"}
                 {gamedata.started && !player.local && (
                   <div id="player-card-holder">
-                    <>
-                      {player.cards.map((card) => {
-                        return <span className="player-card"></span>;
-                      })}
-                    </>
-                    <>
-                      {Array(gamedata.round - player.cards.length)
-                        .fill(undefined)
-                        .map(() => {
-                          return <span className="player-card played"></span>;
-                        })}
-                    </>
+                    <p>{player.cards.length}x</p>
+                    <span className="player-card"></span>
                   </div>
                 )}
               </h3>

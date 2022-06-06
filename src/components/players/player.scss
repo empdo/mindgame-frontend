@@ -14,8 +14,18 @@
 
 #players-container {
     display: flex; 
+
     > div {
         padding: 0.5rem;
         align-content: center;
+    }
+}
+#player-card-holder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem; 
+    p {
+        margin: 0;
     }
 }
