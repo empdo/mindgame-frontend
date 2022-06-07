@@ -127,17 +127,21 @@ const Home = () => {
           <h1 id="rules">Welcome to Mind Game</h1>
           <p>
             The Mind is a card game in which players must work together to play
-            their cards in ascending order from 1 to 100 without talking.
+            their cards in ascending order from 0 to 100 without talking.
           </p>
           <p>
-            The game starts with each player being dealt one card. The players
-            must then play their cards in ascending order, one at a time. If a
-            player plays a card out of order, the team loses a life.
+            The game starts with each player being dealt one card, one more card
+            will be handed out to each players for each level. The players must
+            then play their cards in ascending order, one at a time. If a player
+            plays a card out of order, the team loses a life.
           </p>
           <p>
             If the team runs out of lives, they lose the game. If the team
-            completes all the levels, they win the game.
+            completes enough levels, they win the game. With 2 players, 10
+            levels is required to win, with 3 players, 9 levels and with 4
+            players 8 levels.
           </p>
+          <p>At levels 3, 6 and 9, one life is given out to the team.</p>
         </section>
         <section id="lobbies">
           <h1>Lobbies</h1>
