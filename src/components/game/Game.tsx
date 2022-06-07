@@ -70,7 +70,6 @@ const gameStateReducer = <T extends GameEvent>(
       return { ...state, won: true, started: false };
   }
 };
-let _lives = 0;
 const Game = () => {
   let [ws, setWs] = React.useState<WebSocket | undefined>();
   const navigate = useNavigate();
