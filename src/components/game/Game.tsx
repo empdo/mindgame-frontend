@@ -7,6 +7,7 @@ import "./game.scss";
 import Cards from "./../cards/Cards";
 import { getToken, getWs } from "../../api";
 import { useNavigate } from "react-router-dom";
+import classNames from "classnames";
 
 //import AnimationEnd from "./AnimationEnd";
 
@@ -20,6 +21,7 @@ const defaultLobbyState: LobbyState = {
   lost: false,
   round: 0,
   won: false,
+  totalLives: 0,
 };
 
 export const GameContext = React.createContext<LobbyState>(defaultLobbyState);
@@ -36,7 +38,7 @@ const gameStateReducer = <T extends GameEvent>(
         localPlayer: action.data.find((player) => player.local),
       };
     case ActionType.Started:
-      return { ...state, started: action.data, lost: false };
+      return { ...state, started: action.data, lost: false, won: false };
     case ActionType.DealtCards:
       return { ...state, dealtCards: action.data };
     case ActionType.Cards:
@@ -57,14 +59,18 @@ const gameStateReducer = <T extends GameEvent>(
       };
 
     case ActionType.Lives:
-      return { ...state, lives: action.data };
+      return {
+        ...state,
+        lives: action.data.lives,
+        totalLives: action.data.totalLives,
+      };
     case ActionType.Lost:
       return { ...state, lost: action.data, started: false };
     case ActionType.Won:
       return { ...state, won: true, started: false };
   }
 };
-
+let _lives = 0;
 const Game = () => {
   let [ws, setWs] = React.useState<WebSocket | undefined>();
   const navigate = useNavigate();
@@ -128,6 +134,21 @@ const Game = () => {
   };
 
   const Lives = () => {
+    const [shouldAnimate, setShouldAnimate] = React.useState(false);
+
+    React.useEffect(() => {
+      setShouldAnimate(true);
+      window.setTimeout(() => {
+        setShouldAnimate(false);
+      }, 200);
+    }, []);
+
+    const heartClassNames = [
+      {
+        damage: shouldAnimate,
+      },
+    ];
+
     const hearts = [];
     for (var i = 0; i < gameReducer.lives; i++) {
       hearts.push(
@@ -138,11 +159,11 @@ const Game = () => {
         />
       );
     }
-    for (i = 0; i < gameReducer.players.length - gameReducer.lives; i++) {
+    for (i = 0; i < gameReducer.totalLives - gameReducer.lives; i++) {
       hearts.push(
         <img
           src="/favorite_FILL1_wght400_GRAD0_opsz48.svg"
-          id="dark"
+          className={classNames("dark", heartClassNames)}
           alt=" "
           key={"darkheart-" + i}
         />

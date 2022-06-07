@@ -30,7 +30,7 @@ export interface DealtCardsEvent extends BaseEvent {
 
 export interface LivesEvent extends BaseEvent {
   type: ActionType.Lives;
-  data: number;
+  data: { lives: number; totalLives: number };
 }
 
 export interface LostEvent extends BaseEvent {
@@ -72,6 +72,7 @@ export interface LobbyState {
   round: number;
   localPlayer?: User;
   won: boolean;
+  totalLives: number;
 }
 
 export interface Lobby {

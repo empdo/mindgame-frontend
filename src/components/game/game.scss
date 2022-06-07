@@ -47,6 +47,10 @@ button {
     align-items: center;
     overflow-x: scroll;
 
+    img:last-child {
+        margin-right: 1rem;
+    }
+
     > * {
         flex: 1;
     }
@@ -61,11 +65,14 @@ button {
         margin-right: 1rem;
     }
 
-    #dark {
-        filter: invert(50%);
+    .dark {
+       filter: invert(50%);
+        height: 2.4rem;
+    }
+
+    .damage {
         animation-name: damage;
         animation-duration: 0.15s;
-        height: 2.4rem;
     }
 
     #input-name {
