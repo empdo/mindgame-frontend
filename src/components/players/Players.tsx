@@ -12,6 +12,12 @@ const Players = () => {
         {players.map((player) => {
           return (
             <div key={player.name}>
+              {player.avatarIndex && (
+                <img
+                  src={"/images/avatar" + player.avatarIndex + ".png"}
+                  alt=""
+                />
+              )}
               <h3>
                 {player.name} {player.local && "(you)"}
                 {gamedata.started && !player.local && (

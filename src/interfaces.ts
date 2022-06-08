@@ -4,6 +4,7 @@ export interface User {
   readyState: boolean;
   local: boolean;
   cards: number[];
+  avatarIndex?: number;
 }
 
 export interface BaseEvent {
@@ -73,6 +74,7 @@ export interface LobbyState {
   localPlayer?: User;
   won: boolean;
   totalLives: number;
+  avatarIndex?: number;
 }
 
 export interface Lobby {

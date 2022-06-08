@@ -7,7 +7,6 @@ import "./game.scss";
 import Cards from "./../cards/Cards";
 import { getToken, getWs } from "../../api";
 import { useNavigate } from "react-router-dom";
-import classNames from "classnames";
 
 //import AnimationEnd from "./AnimationEnd";
 
@@ -22,6 +21,7 @@ const defaultLobbyState: LobbyState = {
   round: 0,
   won: false,
   totalLives: 0,
+  avatarIndex: undefined,
 };
 
 export const GameContext = React.createContext<LobbyState>(defaultLobbyState);
@@ -150,12 +150,6 @@ const Game = () => {
   };
 
   const Lives = () => {
-    const heartClassNames = [
-      {
-        damage: true,
-      },
-    ];
-
     let hearts = Array.from({ length: gameReducer.totalLives }, (_, i) => {
       return <Life key={i} i={i} />;
     });
