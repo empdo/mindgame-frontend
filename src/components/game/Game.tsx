@@ -70,6 +70,23 @@ const gameStateReducer = <T extends GameEvent>(
       return { ...state, won: true, started: false };
   }
 };
+
+const Life = (props: { i: number }) => {
+  const gameReducer = React.useContext(GameContext);
+  const i = props.i;
+  const heartRef = React.useRef<HTMLImageElement>(null);
+
+  return (
+    <img
+      src="/favorite_FILL1_wght400_GRAD0_opsz48.svg"
+      ref={heartRef}
+      className={i >= gameReducer.lives ? "dark damage" : ""}
+      onAnimationEnd={() => heartRef.current?.classList.remove("damage")}
+      alt="heart"
+    />
+  );
+};
+
 const Game = () => {
   let [ws, setWs] = React.useState<WebSocket | undefined>();
   const navigate = useNavigate();
@@ -133,41 +150,15 @@ const Game = () => {
   };
 
   const Lives = () => {
-    const [shouldAnimate, setShouldAnimate] = React.useState(false);
-
-    React.useEffect(() => {
-      setShouldAnimate(true);
-      window.setTimeout(() => {
-        setShouldAnimate(false);
-      }, 200);
-    }, []);
-
     const heartClassNames = [
       {
-        damage: shouldAnimate,
+        damage: true,
       },
     ];
 
-    const hearts = [];
-    for (var i = 0; i < gameReducer.lives; i++) {
-      hearts.push(
-        <img
-          src="/favorite_FILL1_wght400_GRAD0_opsz48.svg"
-          alt=" "
-          key={"heart-" + i}
-        />
-      );
-    }
-    for (i = 0; i < gameReducer.totalLives - gameReducer.lives; i++) {
-      hearts.push(
-        <img
-          src="/favorite_FILL1_wght400_GRAD0_opsz48.svg"
-          className={classNames("dark", heartClassNames)}
-          alt=" "
-          key={"darkheart-" + i}
-        />
-      );
-    }
+    let hearts = Array.from({ length: gameReducer.totalLives }, (_, i) => {
+      return <Life key={i} i={i} />;
+    });
     return <>{hearts}</>;
   };
 
