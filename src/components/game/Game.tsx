@@ -18,7 +18,7 @@ const defaultLobbyState: LobbyState = {
   yourCards: [],
   lives: 0,
   lost: false,
-  round: 0,
+  round: 1,
   won: false,
   totalLives: 0,
   avatarIndex: undefined,
@@ -48,7 +48,6 @@ const gameStateReducer = <T extends GameEvent>(
 
       return {
         ...state,
-        round: action.data[state.localPlayer.id].length,
         yourCards: action.data[state.localPlayer.id].sort(function (a, b) {
           return a > b ? -1 : 1;
         }),
@@ -68,6 +67,8 @@ const gameStateReducer = <T extends GameEvent>(
       return { ...state, lost: action.data, started: false };
     case ActionType.Won:
       return { ...state, won: true, started: false };
+    case ActionType.NewRound:
+      return { ...state, round: action.data };
   }
 };
 
@@ -122,9 +123,12 @@ const Game = () => {
     if (!token) {
       getToken(token || undefined);
     }
+
     if (id && !ws && token) {
+      console.log("settings ws");
       setWs(getWs(url, handleGameReducer, token));
     }
+
     if (ws) {
       ws.onclose = () => {
         console.log("closed");

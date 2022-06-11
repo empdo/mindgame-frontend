@@ -28,7 +28,7 @@ const Home = () => {
         <div id="lobbies-container">
           {lobbies.map((lobby) => {
             return (
-              <div className="lobby">
+              <div className="lobby" key={lobby.id}>
                 <div className="lobby-players">{lobby.players.toString()}</div>
                 <h2 onClick={() => navigate("/game/" + lobby.id)}>Join</h2>
               </div>

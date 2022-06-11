@@ -21,7 +21,12 @@ const Cards = (props: { sendCard: (card: number) => void }) => {
       <>
         {gameData.dealtCards.map((card, index) => {
           return (
-            <div className="card" key={index}>
+            <div className="card">
+              <img
+                src={`/images/kort${card % 2 === 0 ? 1 : 2}.png`}
+                alt=""
+                className="card"
+              ></img>
               <h2>{card}</h2>
             </div>
           );
@@ -57,6 +62,11 @@ const Cards = (props: { sendCard: (card: number) => void }) => {
                 );
               }}
             >
+              <img
+                src={`/images/kort${card % 2 === 0 ? 1 : 2}.png`}
+                alt=""
+                className="card"
+              ></img>
               <h2>{card}</h2>
             </div>
           );

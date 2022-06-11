@@ -55,15 +55,12 @@ button {
         flex: 1;
     }
 
-     img {
-        height: 3.5rem;
-        max-width: 3.5rem;
-    }
     > img {
         height: 2.5rem;
         max-width: 2.5rem;
         filter: invert(100%);
         margin: 0.3rem;
+        animation: none;
 
     }
     .settings-icon {
@@ -93,6 +90,7 @@ button {
         }
     }
 }
+
 
 @keyframes damage {
     0% {

@@ -28,4 +28,42 @@
     p {
         margin: 0;
     }
+
+}
+
+
+#avatar-container {
+    min-height: 3.5rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+    img {
+        height: 3.5rem;
+        max-width: 3.5rem;
+    }
+    .animated {
+        animation: bounce 0.5s ease-in-out;
+    }
+}
+
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+    25% {
+        transform: translateY(-0.5rem);
+    }
+    50% {
+        transform: translateY(0);
+    }
+    75% {
+        height: 2.5rem;
+        width: 4rem
+    }
+    100% {
+        height: 3.5rem;
+        width: 3.5rem;
+    }
 }

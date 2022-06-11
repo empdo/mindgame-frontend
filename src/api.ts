@@ -34,12 +34,5 @@ export const getWs = (
     handleGameReducer(data);
   });
 
-  ws.onclose = () => {
-    console.log("closed");
-    setTimeout(() => {
-      getWs(url, handleGameReducer, token);
-    }, 1000);
-  };
-
   return ws;
 };

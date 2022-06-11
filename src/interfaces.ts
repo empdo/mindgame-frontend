@@ -42,6 +42,10 @@ export interface LostEvent extends BaseEvent {
 export interface WonEvent extends BaseEvent {
   type: ActionType.Won;
 }
+export interface NewRoundEvent extends BaseEvent {
+  type: ActionType.NewRound;
+  data: number;
+}
 
 export type GameEvent =
   | PlayerJoinEvent
@@ -50,7 +54,8 @@ export type GameEvent =
   | DealtCardsEvent
   | LivesEvent
   | LostEvent
-  | WonEvent;
+  | WonEvent
+  | NewRoundEvent;
 
 export enum ActionType {
   PlayerJoin = 1,
@@ -60,6 +65,7 @@ export enum ActionType {
   Lives = 5,
   Lost = 6,
   Won = 7,
+  NewRound = 8,
 }
 
 export interface LobbyState {

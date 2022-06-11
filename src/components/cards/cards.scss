@@ -14,15 +14,25 @@
 
 .card {
     position: relative;
-    background-color: #16181D;
-    border: 0.2rem solid white;
+    display: flex;
+    justify-content: center;
+
     width: 10rem;
     min-width: 10rem;
     height: 14rem;
     border-radius: 0.5rem;
-    box-shadow: 1rem 1rem 1rem #0004;
+    box-shadow: 0.5rem 0.5rem 0.5rem #0004;
 
     transition: 0.2s;
+
+    img {
+        height: 100%;
+        width: 100%;
+    }
+    h2 {
+        top: 1.6rem;
+        position: absolute;
+    }
 }
 
 @media screen and (min-width: 960px) {
@@ -50,7 +60,7 @@
     padding-top: 1.5rem;
 
 
-    .card:not(:last-child) {
+    .card:not(:last-child):not(img):not(h2) {
         margin-left: -2rem;
     }
 
@@ -64,11 +74,8 @@
     grid-area: top;
     min-height: 14rem;
 
-    .card:not(:last-child) {
+    .card:not(:last-child):not(img):not(h2) {
         margin-left: -9.5rem;
-    }
-    .card {
-        box-shadow: -1rem 1rem 1rem #0004;
     }
 
 }                           
