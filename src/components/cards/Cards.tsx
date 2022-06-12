@@ -25,7 +25,6 @@ const Cards = (props: { sendCard: (card: number) => void }) => {
               <img
                 src={`/images/kort${card % 2 === 0 ? 1 : 2}.png`}
                 alt=""
-                className="card"
               ></img>
               <h2>{card}</h2>
             </div>
@@ -54,7 +53,6 @@ const Cards = (props: { sendCard: (card: number) => void }) => {
           return (
             <div
               key={index}
-              className="card"
               onClick={() => {
                 props.sendCard(card);
                 gameData.yourCards = gameData.yourCards.filter(
