@@ -177,18 +177,20 @@ const Game = () => {
         <GameContext.Provider value={gameReducer}>
           <div id="top-bar">
             <Players />
-            {gameReducer.started ? (
-              <Lives />
-            ) : (
-              gameReducer.players.length > 0 && (
-                <img
-                  src="/settings_FILL0_wght400_GRAD0_opsz48.svg"
-                  className="settings-icon clickable"
-                  onClick={() => navigate("/settings")}
-                  alt="settings"
-                />
-              )
-            )}
+            <div>
+              {gameReducer.started ? (
+                <Lives />
+              ) : (
+                gameReducer.players.length > 0 && (
+                  <img
+                    src="/settings_FILL0_wght400_GRAD0_opsz48.svg"
+                    className="settings-icon clickable"
+                    onClick={() => navigate("/settings")}
+                    alt="settings"
+                  />
+                )
+              )}
+            </div>
           </div>
           {gameReducer.started ? (
             <Cards sendCard={sendCard} />

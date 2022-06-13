@@ -1,8 +1,10 @@
-$bg-color: bg;
+$bg-color: #2d1a2c;
 
 .App {
   text-align: center;
   box-shadow: inset 0 0 10rem black;
+
+  background-color: $bg-color;
 }
 
 a {
@@ -28,7 +30,7 @@ a {
 }
 
 html {
-  background-color: #16181d;
+  background-color: $bg-color;
 }
 
 @keyframes fadeIn {

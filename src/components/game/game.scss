@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&display=swap');
+
+$top-bar-color: #1c1c1c00;
+
 body, html {
     margin: 0;
     padding: 0;
@@ -12,7 +15,6 @@ body, html {
 }
 
 .App {
-    background-color: #16181D;
 //    background-image: url("/file2.png");
 //    background-position: center;
 //    background-size: cover;
@@ -40,8 +42,21 @@ button {
     align-items: center;
 }
 
+#left-triangle {
+    max-width: 2rem;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-top: 8rem solid $top-bar-color;
+}
+#right-triangle {
+    max-width: 2rem;
+    height: 0;
+    border-right: 50px solid transparent;
+    border-bottom: 8rem solid $top-bar-color;
+}
+
 #top-bar {
-    display: flex;
+    display: inline-flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -51,18 +66,28 @@ button {
         margin-right: 1rem;
     }
 
-    > * {
-        flex: 1;
+        min-height: 8rem;
+
+        >:last-child {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+        }
+
+        > * {
+            flex: 1;
+        }
+
+        > div > img {
+            height: 2.5rem;
+            max-width: 2.5rem;
+            filter: invert(100%);
+            margin: 0.3rem;
+            animation: none;
+
     }
 
-    > img {
-        height: 2.5rem;
-        max-width: 2.5rem;
-        filter: invert(100%);
-        margin: 0.3rem;
-        animation: none;
 
-    }
     .settings-icon {
         margin-right: 1rem;
     }

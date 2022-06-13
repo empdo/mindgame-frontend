@@ -20,12 +20,12 @@
     width: 10rem;
     min-width: 10rem;
     height: 14rem;
-    border-radius: 0.5rem;
-    box-shadow: 0.5rem 0.5rem 0.5rem #0004;
 
     transition: 0.2s;
 
     img {
+        box-shadow: 0.5rem 0.5rem 0.5rem #0004;
+        border-radius: 0.5rem;
         height: 100%;
         width: 100%;
     }
@@ -76,7 +76,7 @@
     min-height: 14rem;
 
     .card:not(:last-child):not(img):not(h2) {
-        margin-left: -9.5rem;
+        margin-left: -8.5rem;
     }
 
 }                           
@@ -87,12 +87,12 @@
            
 #newRound {
     height: 100%;
-    min-height: 90vh;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     overflow: hidden;
+    flex: 1;
 
     h1 {
         animation: newRound 2s ease-in-out forwards;
