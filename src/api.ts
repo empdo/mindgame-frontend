@@ -1,7 +1,13 @@
 import { GameEvent } from "./interfaces";
 
 export const getToken = (token?: string) => {
-  const name = window.localStorage.getItem("name") || "";
+  let name = window.localStorage.getItem("name") || "";
+
+  if (name.length > 10) {
+    name = "";
+    window.localStorage.name = "";
+  }
+
   fetch("https://mind.essung.dev/api/token/", {
     method: "POST",
     headers: {
@@ -21,6 +27,7 @@ export const getToken = (token?: string) => {
       console.log(err);
     });
 };
+
 export const getWs = (
   url: string,
   handleGameReducer: React.Dispatch<GameEvent>,
